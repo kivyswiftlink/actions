@@ -2,11 +2,7 @@
 name: 'Build Numpy'
 author: 'PythonSwiftLink'
 description: 'Set up your GitHub Actions workflow with a specific version of Xcode'
-inputs:
-  tag:
-    description: 'input new release tag'
-    required: true
-    type: string
+
 runs:
   using: "composite"
   steps:
