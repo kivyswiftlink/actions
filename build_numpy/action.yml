@@ -15,7 +15,7 @@ runs:
       shell: bash
       run: |
         NUMPY=output/numpy
-        mkdir -p $NUMPY/headers
+        mkdir -pv $NUMPY/headers
         BUILD_HEADERS=build/numpy/iphoneos-arm64/numpy-1.24.4/build/src.macosx-13.6-x86_64-3.11/numpy/core/include/numpy/
         cp -f $BUILD_HEADERS/__multiarray_api.h output/numpy/headers/
         cp -f $BUILD_HEADERS/__ufunc_api.h output/numpy/headers/
@@ -29,14 +29,14 @@ runs:
         rm -rf $PY_SITE/*
 
         NUMPY_XCS=$NUMPY/xcframework
-        mkdir -p $NUMPYXCS
+        mkdir -pv $NUMPY_XCS
 
-        mv -f dist/xcframework/libnumpy.xcframework $NUMPYXCS/
-        mv -f dist/xcframework/libnpyrandom.xcframework $NUMPYXCS/
-        mv -f dist/xcframework/libnpymath.xcframework $NUMPYXCS/
+        mv -f dist/xcframework/libnumpy.xcframework $NUMPY_XCS/
+        mv -f dist/xcframework/libnpyrandom.xcframework $NUMPY_XCS/
+        mv -f dist/xcframework/libnpymath.xcframework $NUMPY_XCS/
 
         NUMPY_HEADERS=dist/include/common/numpy/numpy
-        NUMPY_XC=$NUMPYXCS/libnumpy.xcframework
+        NUMPY_XC=$NUMPY_XCS/libnumpy.xcframework
         cp -rf $NUMPY_HEADERS $NUMPY_XC/ios-arm64/
         cp -rf $NUMPY_HEADERS $NUMPY_XC/ios-x86_64-simulator/
         cp -f plists/numpy.plist $NUMPY_XC/Info.plist
