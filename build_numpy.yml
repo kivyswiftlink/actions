@@ -1,1 +1,38 @@
 
+name: 'Setup Xcode version'
+author: 'Maxim Lobanov'
+description: 'Set up your GitHub Actions workflow with a specific version of Xcode'
+inputs:
+  xcode-version:
+    description: 'Version of Xcode to use'
+    required: false
+    default: latest
+runs:
+  using: "composite"
+  steps:
+    
+    - name: build numpy
+      run: toolchain build numpy
+
+      - name: move numpy build
+        run: |
+          mkdir -p output/numpy/headers
+          BUILD_HEADERS=build/numpy/iphoneos-arm64/numpy-1.24.4/build/src.macosx-13.6-x86_64-3.11/numpy/core/include/numpy/
+          cp -f $BUILD_HEADERS/__multiarray_api.h output/numpy/headers/
+          cp -f $BUILD_HEADERS/__ufunc_api.h output/numpy/headers/
+          cp -f $BUILD_HEADERS/_numpyconfig.h output/numpy/headers/
+          cp -f $BUILD_HEADERS/_umath_doc_generated.h output/numpy/headers/
+          DIST_HEADERS=dist/include/common/numpy/numpy
+          mv -f $DIST_HEADERS/* output/numpy/headers/
+
+          PY_SITE=dist/root/python3/lib/python3.11/site-packages
+          mv -f $PY_SITE/numpy output/numpy/numpy-site
+          rm -rf $PY_SITE/*
+          cd output/numpy
+          zip -r numpy-site.zip numpy-site
+          rm -rf numpy-site
+
+  
+branding:
+  icon: 'code'
+  color: 'blue'
