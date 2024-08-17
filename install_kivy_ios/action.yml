@@ -31,11 +31,11 @@ runs:
       run: |
         init_path = "kivy-ios/kivy_ios/recipes/kivy/__init__.py"
         with open(init_path, "r") as input_file:
-          init = input_file.read()
-          init = init.replace("url = \"https://github.com/kivy/kivy/archive/{version}.zip\"", "url = \"src\"")
-          print(init)
-          with open(init_path, "w") as output_file:
-          output_file.write(init)
+            init = input_file.read()
+            init = init.replace("url = \"https://github.com/kivy/kivy/archive/{version}.zip\"", "url = \"src\"")
+            print(init)
+            with open(init_path, "w") as output_file:
+                output_file.write(init)
       
     - name: install modified kivy-ios
       shell: bash
