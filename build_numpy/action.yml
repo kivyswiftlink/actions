@@ -8,9 +8,11 @@ runs:
   steps:
     
     - name: build numpy
+      shell: bash
       run: toolchain build numpy
 
     - name: move numpy build
+      shell: bash
       run: |
         mkdir -p output/numpy/headers
         BUILD_HEADERS=build/numpy/iphoneos-arm64/numpy-1.24.4/build/src.macosx-13.6-x86_64-3.11/numpy/core/include/numpy/

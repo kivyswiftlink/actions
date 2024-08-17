@@ -6,6 +6,7 @@ runs:
   using: "composite"
   steps:
     - name: install kivy-ios
+      shell: bash
       run: |
           python3 -m pip install --upgrade pip
           
@@ -37,6 +38,7 @@ runs:
           output_file.write(init)
       
     - name: install modified kivy-ios
+      shell: bash
       run: |
         pip3 install -e kivy-ios
     
