@@ -31,9 +31,9 @@ runs:
         NUMPY_XCS=$NUMPY/xcframework
         mkdir $NUMPYXCS
 
-        cp -rf dist/xcframework/libnumpy.xcframework $NUMPYXCS/
-        cp -rf dist/xcframework/libnpyrandom.xcframework $NUMPYXCS/
-        cp -rf dist/xcframework/libnpymath.xcframework $NUMPYXCS/
+        mv -f dist/xcframework/libnumpy.xcframework $NUMPYXCS/
+        mv -f dist/xcframework/libnpyrandom.xcframework $NUMPYXCS/
+        mv -f dist/xcframework/libnpymath.xcframework $NUMPYXCS/
 
         NUMPY_HEADERS=dist/include/common/numpy/numpy
         NUMPY_XC=$NUMPYXCS/libnumpy.xcframework
@@ -88,7 +88,14 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-  
+        
+    - name: update Numpy package.swift
+      shell: bash
+      run: |
+        SwiftPackageGen generate \
+          ./package_templates/KivyNumpy.yml \
+          ${{ github.event.inputs.tag }} \
+          --output output/numpy/Package.swift
 branding:
   icon: 'code'
   color: 'blue'
