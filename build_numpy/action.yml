@@ -29,7 +29,7 @@ runs:
         rm -rf $PY_SITE/*
 
         NUMPY_XCS=$NUMPY/xcframework
-        mkdir $NUMPYXCS
+        mkdir -p $NUMPYXCS
 
         mv -f dist/xcframework/libnumpy.xcframework $NUMPYXCS/
         mv -f dist/xcframework/libnpyrandom.xcframework $NUMPYXCS/
