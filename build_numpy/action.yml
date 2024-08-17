@@ -14,7 +14,8 @@ runs:
     - name: move numpy build
       shell: bash
       run: |
-        mkdir -p output/numpy/headers
+        NUMPY=output/numpy
+        mkdir -p $NUMPY/headers
         BUILD_HEADERS=build/numpy/iphoneos-arm64/numpy-1.24.4/build/src.macosx-13.6-x86_64-3.11/numpy/core/include/numpy/
         cp -f $BUILD_HEADERS/__multiarray_api.h output/numpy/headers/
         cp -f $BUILD_HEADERS/__ufunc_api.h output/numpy/headers/
@@ -24,12 +25,69 @@ runs:
         mv -f $DIST_HEADERS/* output/numpy/headers/
 
         PY_SITE=dist/root/python3/lib/python3.11/site-packages
-        mv -f $PY_SITE/numpy output/numpy/numpy-site
+        mv -f $PY_SITE/numpy $NUMPY/numpy-site
         rm -rf $PY_SITE/*
-        cd output/numpy
+
+        NUMPY_XCS=$NUMPY/xcframework
+        mkdir $NUMPYXCS
+
+        cp -rf dist/xcframework/libnumpy.xcframework $NUMPYXCS/
+        cp -rf dist/xcframework/libnpyrandom.xcframework $NUMPYXCS/
+        cp -rf dist/xcframework/libnpymath.xcframework $NUMPYXCS/
+
+        NUMPY_HEADERS=dist/include/common/numpy/numpy
+        NUMPY_XC=$NUMPYXCS/libnumpy.xcframework
+        cp -rf $NUMPY_HEADERS $NUMPY_XC/ios-arm64/
+        cp -rf $NUMPY_HEADERS $NUMPY_XC/ios-x86_64-simulator/
+        cp -f plists/numpy.plist $NUMPY_XC/Info.plist
+
+    - name: move numpy dist files
+      shell: bash
+      run: |
+        NUMPY=output/numpy
+
+        IOS_LIBS_SRC=dist/lib/iphoneos
+        IOS_LIBS_DST=$NUMPY/dist_lib/iphoneos
+
+        SIM_LIBS_SRC=dist/lib/iphonesimulator
+        SIM_LIBS_DST=$NUMPY/dist_lib/iphonesimulator
+        
+        echo $IOS_LIBS
+        echo $SIM_LIBS
+
+        ###### numpy #######
+        mkdir -p $NUMPY/$IOS_LIBS
+        mv -f $IOS_LIBS_SRC/libnpymath.a $IOS_LIBS_DST/
+        mv -f $IOS_LIBS_SRC/libnpyrandom.a IOS_LIBS_DST/
+        mv -f $IOS_LIBS_SRC/libnumpy.a IOS_LIBS_DST/
+        echo transfered $IOS_LIBS_DST
+
+
+        mkdir -p $NUMPY/$SIM_LIBS
+        mv -f $SIM_LIBS_SRC/libnpymath.a $SIM_LIBS_DST/
+        mv -f $SIM_LIBS_SRC/libnpyrandom.a $SIM_LIBS_DST/
+        mv -f $SIM_LIBS_SRC/libnumpy.a $SIM_LIBS_DST/
+        echo transfered $SIM_LIBS_DST
+
+    - name: numpy_dist.zip
+      working-directory: ./output/numpy
+      shell: bash
+      run: |
+        zip -r numpy_dist.zip dist_lib
+        rm -rf dist_lib
+        
         zip -r numpy-site.zip numpy-site
         rm -rf numpy-site
 
+    - name: move and zip xcframeworks
+      working-directory: ./output/numpy/xcframework
+      shell: bash
+      run: |
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
   
 branding:
   icon: 'code'
