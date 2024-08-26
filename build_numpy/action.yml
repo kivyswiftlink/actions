@@ -58,8 +58,8 @@ runs:
         ###### numpy #######
         mkdir -pv $IOS_LIBS_DST
         mv -f $IOS_LIBS_SRC/libnpymath.a $IOS_LIBS_DST/
-        mv -f $IOS_LIBS_SRC/libnpyrandom.a IOS_LIBS_DST/
-        mv -f $IOS_LIBS_SRC/libnumpy.a IOS_LIBS_DST/
+        mv -f $IOS_LIBS_SRC/libnpyrandom.a $IOS_LIBS_DST/
+        mv -f $IOS_LIBS_SRC/libnumpy.a $IOS_LIBS_DST/
         echo transfered $IOS_LIBS_DST
 
 
