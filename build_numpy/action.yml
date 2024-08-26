@@ -56,14 +56,14 @@ runs:
         echo $SIM_LIBS
 
         ###### numpy #######
-        mkdir -p $NUMPY/$IOS_LIBS
+        mkdir -pv $IOS_LIBS_DST
         mv -f $IOS_LIBS_SRC/libnpymath.a $IOS_LIBS_DST/
         mv -f $IOS_LIBS_SRC/libnpyrandom.a IOS_LIBS_DST/
         mv -f $IOS_LIBS_SRC/libnumpy.a IOS_LIBS_DST/
         echo transfered $IOS_LIBS_DST
 
 
-        mkdir -p $NUMPY/$SIM_LIBS
+        mkdir -pv $SIM_LIBS_DST
         mv -f $SIM_LIBS_SRC/libnpymath.a $SIM_LIBS_DST/
         mv -f $SIM_LIBS_SRC/libnpyrandom.a $SIM_LIBS_DST/
         mv -f $SIM_LIBS_SRC/libnumpy.a $SIM_LIBS_DST/
