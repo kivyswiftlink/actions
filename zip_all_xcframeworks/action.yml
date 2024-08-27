@@ -1,0 +1,89 @@
+name: 'Zip All xcframeworks'
+author: 'KivySwiftLink'
+description: 'Zips all xcframework in dist folders'
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: python zip xcframeworks
+      shell: bash
+      working-directory: ./output/python3/xcframework
+      run: |
+        mv -f libpython3.11.xcframework libpython311.xcframework
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+
+    - name: kivy zip xcframeworks
+      shell: bash
+      working-directory: ./output/kivy/xcframework
+      run: |
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+
+    - name: numpy zip xcframeworks
+      shell: bash
+      working-directory: ./output/numpy/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+
+    - name: kiwisolver zip xcframeworks
+      shell: bash
+      working-directory: ./output/kiwisolver/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+    
+    - name: pillow zip xcframeworks
+      shell: bash
+      working-directory: ./output/pillow/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+    
+    - name: matplotlib zip xcframeworks
+      shell: bash
+      working-directory: ./output/matplotlib/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+    
+    - name: ffmpeg zip xcframeworks
+      shell: bash
+      working-directory: ./output/ffmpeg/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+
+    - name: ffpyplayer zip xcframeworks
+      shell: bash
+      working-directory: ./output/ffpyplayer/xcframework
+      run: |
+        for FILE in *; 
+            do
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+    
