@@ -26,10 +26,10 @@ runs:
       run: |
         mkdir -p PythonCore/Sources
         cp -rf package_templates/PythonLibrary PythonCore/Sources/
-        cp -f python/Package.swift PythonCore/
+        cp -f python3/Package.swift PythonCore/
         cp -rf package_templates/PythonCore/Sources/PythonCore PythonCore/Sources/
 
-        mv -f python/python_lib PythonCore/Sources/PythonLibrary/lib
+        #mv -f python/python_lib PythonCore/Sources/PythonLibrary/lib
 
 
     # commit new package to kivypythoncore/master
