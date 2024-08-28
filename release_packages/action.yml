@@ -87,7 +87,7 @@ runs:
         artifacts: "kivy/kivy_dist.zip, kivy/site-packages.zip, kivy/kivy-ios.zip, kivy/xcframework/*.zip"
         tag: ${{ inputs.tag }}
         repo: KivyCore
-        token: ${{ secrets.Homebrew }}
+        token: ${{ inputs.token }}
         allowUpdates: true
         makeLatest: ${{ inputs.lastest }}
     
@@ -117,7 +117,7 @@ runs:
         artifacts: "numpy/numpy_dist.zip, numpy/numpy-site.zip, numpy/xcframework/*.zip"
         tag: ${{ inputs.tag }}
         repo: KivyNumpy
-        token: ${{ secrets.Homebrew }}
+        token: ${{ inputs.token }}
         allowUpdates: true
         makeLatest: ${{ inputs.lastest }}
 
@@ -145,28 +145,28 @@ runs:
     - name: release KivyExtra
       uses: ncipollo/release-action@v1
       with:
-        artifacts: 
-          - pillow/pillow_dist.zip
-          - kiwisolver/kiwisolver_dist.zip
-          - materialyoucolor/materialyoucolor_dist.zip
-          - matplotlib/matplotlib_dist.zip
-          - ffmpeg/ffmpeg_dist.zip
-          - ffpyplayer/ffpyplayer_dist.zip
+        artifacts: "
+          pillow/pillow_dist.zip,
+          kiwisolver/kiwisolver_dist.zip,
+          materialyoucolor/materialyoucolor_dist.zip,
+          matplotlib/matplotlib_dist.zip,
+          ffmpeg/ffmpeg_dist.zip,
+          ffpyplayer/ffpyplayer_dist.zip,
 
-          - pillow/pillow-site.zip
-          - kiwisolver/kiwisolver-site.zip
-          - materialyoucolor/materialyoucolor-site.zip
-          - matplotlib/matplotlib-site.zip
-          - ffmpeg/ffmpeg-site.zip
-          - ffpyplayer/ffpyplayer-site.zip
+          pillow/pillow-site.zip,
+          kiwisolver/kiwisolver-site.zip,
+          materialyoucolor/materialyoucolor-site.zip,
+          matplotlib/matplotlib-site.zip,
+          ffmpeg/ffmpeg-site.zip,
+          ffpyplayer/ffpyplayer-site.zip,
 
-          - pillow/xcframework/*.zip
-          - kiwisolver/xcframework/*.zip
-          - materialyoucolor/xcframework/*.zip
-          - matplotlib/xcframework/*.zip
-          - ffmpeg/xcframework/*.zip
-          - ffpyplayer/xcframework/*.zip
-
+          pillow/xcframework/*.zip,
+          kiwisolver/xcframework/*.zip,
+          materialyoucolor/xcframework/*.zip,
+          matplotlib/xcframework/*.zip,
+          ffmpeg/xcframework/*.zip,
+          ffpyplayer/xcframework/*.zip
+          "
 
 
         tag: ${{ inputs.tag }}
