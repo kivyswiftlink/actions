@@ -3,16 +3,23 @@ name: 'Release Packages'
 author: 'KivySwiftLink'
 description: 'Set up your GitHub Actions workflow with a specific version of Xcode'
 
+inputs:
+  token:
+    description: 'A Github PAT'
+    required: true
+
+  tag:
+    description: 'release tag'
+    required: true
+
+  lastest:
+    description: 'lastest release ?'
+    required: true
+
 runs:
   using: "composite"
   steps: 
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-
-    - uses: actions/download-artifact@v3
-      with:
-        name: release-output
+    
 
     - name: create PythonCore
       shell: bash
@@ -29,7 +36,7 @@ runs:
     - name: commit Kivy PythonCore to master
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.Homebrew }}
+        API_TOKEN_GITHUB: ${{ inputs.token }}
       with:
         source-directory: 'PythonCore'
         destination-github-username: 'kivyswiftlink'
@@ -41,11 +48,11 @@ runs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "python/python_dist.zip, python/xcframework/*.zip"
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ inputs.tag }}
         repo: PythonCore
-        token: ${{ secrets.Homebrew }}
+        token: ${{ inputs.token }}
         allowUpdates: true
-        makeLatest: ${{ github.event.inputs.lastest }}
+        makeLatest: ${{ inputs.lastest }}
 
     - name: create KivyCore
       shell: bash
@@ -65,7 +72,7 @@ runs:
     - name: commit KivyCore to master
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.Homebrew }}
+        API_TOKEN_GITHUB: ${{ inputs.token }}
       with:
         source-directory: 'KivyCore'
         destination-github-username: 'kivyswiftlink'
@@ -78,11 +85,11 @@ runs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "kivy/kivy_dist.zip, kivy/site-packages.zip, kivy/kivy-ios.zip, kivy/xcframework/*.zip"
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ inputs.tag }}
         repo: KivyCore
         token: ${{ secrets.Homebrew }}
         allowUpdates: true
-        makeLatest: ${{ github.event.inputs.lastest }}
+        makeLatest: ${{ inputs.lastest }}
     
     - name: create KivyNumpy
       shell: bash
@@ -95,7 +102,7 @@ runs:
     - name: commit KivyNumpy to master
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.Homebrew }}
+        API_TOKEN_GITHUB: ${{ inputs.token }}
       with:
         source-directory: 'KivyNumpy'
         destination-github-username: 'kivyswiftlink'
@@ -108,11 +115,11 @@ runs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "numpy/numpy_dist.zip, numpy/numpy-site.zip, numpy/xcframework/*.zip"
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ inputs.tag }}
         repo: KivyNumpy
         token: ${{ secrets.Homebrew }}
         allowUpdates: true
-        makeLatest: ${{ github.event.inputs.lastest }}
+        makeLatest: ${{ inputs.lastest }}
 
 
     - name: create KivyExtra
@@ -126,7 +133,7 @@ runs:
     - name: commit KivyExtra to master
       uses: cpina/github-action-push-to-another-repository@main
       env:
-        API_TOKEN_GITHUB: ${{ secrets.Homebrew }}
+        API_TOKEN_GITHUB: ${{ inputs.token }}
       with:
         source-directory: 'KivyExtra'
         destination-github-username: 'kivyswiftlink'
@@ -162,8 +169,8 @@ runs:
 
 
 
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ inputs.tag }}
         repo: KivyExtra
-        token: ${{ secrets.Homebrew }}
+        token: ${{ inputs.token }}
         allowUpdates: true
-        makeLatest: ${{ github.event.inputs.lastest }}
+        makeLatest: ${{ inputs.lastest }}
