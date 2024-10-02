@@ -8,10 +8,8 @@ runs:
     - name: install kivy-ios
       shell: bash
       run: |
-	python3 -m pip install --upgrade pip
- 	
-	git clone https://github.com/kivyswiftlink/kivy-ios
- 	
-	pip3 install -e kivy-ios
+        python3 -m pip install --upgrade pip
+        git clone https://github.com/kivyswiftlink/kivy-ios
+        pip3 install -e kivy-ios
           
           
