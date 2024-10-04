@@ -16,7 +16,37 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-
+		
+		- name: png zip xcframeworks
+      shell: bash
+      working-directory: ./output/libpng/xcframework
+      run: |
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+	
+		- name: jpeg zip xcframeworks
+      shell: bash
+      working-directory: ./output/libjpeg/xcframework
+      run: |
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+	
+		- name: sdl2 zip xcframeworks
+      shell: bash
+      working-directory: ./output/sd2/xcframework
+      run: |
+        for FILE in *; 
+            do 
+                zip -r "${FILE%.*}".zip $FILE
+                rm -rf $FILE
+            done
+	
     - name: kivy zip xcframeworks
       shell: bash
       working-directory: ./output/kivy/xcframework
