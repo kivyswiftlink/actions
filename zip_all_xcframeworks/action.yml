@@ -1,11 +1,10 @@
-name: 'Zip All xcframeworks'
-author: 'KivySwiftLink'
-description: 'Zips all xcframework in dist folders'
+name: "Zip All xcframeworks"
+author: "KivySwiftLink"
+description: "Zips all xcframework in dist folders"
 
 runs:
   using: "composite"
   steps:
-
     - name: python zip xcframeworks
       shell: bash
       working-directory: ./output/python3/xcframework
@@ -16,7 +15,7 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-    
+
     - name: png zip xcframeworks
       shell: bash
       working-directory: ./output/libpng/xcframework
@@ -26,7 +25,7 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-	
+
     - name: jpeg zip xcframeworks
       shell: bash
       working-directory: ./output/libjpeg/xcframework
@@ -76,7 +75,7 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-    
+
     - name: pillow zip xcframeworks
       shell: bash
       working-directory: ./output/pillow/xcframework
@@ -86,7 +85,7 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-    
+
     - name: matplotlib zip xcframeworks
       shell: bash
       working-directory: ./output/matplotlib/xcframework
@@ -96,7 +95,7 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-    
+
     - name: ffmpeg zip xcframeworks
       shell: bash
       working-directory: ./output/ffmpeg/xcframework
@@ -116,4 +115,3 @@ runs:
                 zip -r "${FILE%.*}".zip $FILE
                 rm -rf $FILE
             done
-    
