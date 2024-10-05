@@ -38,7 +38,7 @@ runs:
 
     - name: sdl2 zip xcframeworks
       shell: bash
-      working-directory: ./output/sd2/xcframework
+      working-directory: ./output/sdl2/xcframework
       run: |
         for FILE in *; 
             do 
