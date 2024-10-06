@@ -16,9 +16,9 @@ runs:
                 rm -rf $FILE
             done
 
-    - name: png zip xcframeworks
+    - name: imagecore zip xcframeworks
       shell: bash
-      working-directory: ./output/libpng/xcframework
+      working-directory: ./output/imagecore/xcframework
       run: |
         for FILE in *; 
             do 
@@ -26,9 +26,11 @@ runs:
                 rm -rf $FILE
             done
 
-    - name: jpeg zip xcframeworks
+
+
+    - name: freetype zip xcframeworks
       shell: bash
-      working-directory: ./output/libjpeg/xcframework
+      working-directory: ./output/freetype/xcframework
       run: |
         for FILE in *; 
             do 
@@ -36,7 +38,7 @@ runs:
                 rm -rf $FILE
             done
 
-    - name: sdl2 zip xcframeworks
+		- name: sdl2 zip xcframeworks
       shell: bash
       working-directory: ./output/sdl2/xcframework
       run: |
